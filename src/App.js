@@ -4,23 +4,70 @@ import React from 'react';
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import HomePage from './components/HomePage';
+import ProductPage from './components/ProductPage';
+import CartPage from './components/CartPage';
+import Home from './components/Home';
+import { ThemeContext } from './components/ThemeContext';
+import { v4 as uuid } from 'uuid';
+import AddProductPage from './components/AddProductPage';
+import Login from './components/LoginPage';
+import { productsApi } from './components/ProductsApi';
+
 function App() {
 
-  // const [productList, setProductList] = useState([])
-  // const [cartList, setCartList] = useState([])
+  const [theme, setTheme] = useState("dark")
+  const [productList, setProductList] = useState([])
+  const [cartList, setCartList] = useState([])
   
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
-  // const addToCart = (productId) => {
-  //   const CartItem = {
-  //     id: 
-  //   }
-  // }
+  const addToCart = (productId) => {
+    const cartItem = {
+      id: uuid(),
+      productId: productId,
+      quantity: 1
+    }
+    setCartList([...cartList, cartItem])
+    navigate('/cart')
+  }
+
+  const addProduct = async (newProductData) => {
+    const response = await fetch(productsApi , {
+       method: "POST",
+       headers: {"Content-Type": "application/json"},
+       body: JSON.stringify(newProductData)
+    })
+    const newProductWithId = await response.json()
+    setProductList([...productList, newProductWithId])
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(productsApi)
+      const data = await response.json()
+      setProductList(data)
+    }
+    fetchData()
+  }, [])
+  
+
 
   return (
-    <div className="App">
+    <ThemeContext.Provider value= {[theme, setTheme]}>
+   <div className="App">
     <HomePage/>
-    </div>
+    <Container>
+      <Routes>
+        <Route path='/' element={<Home productList={productList} addToCart={addToCart}/>} />
+        <Route path='/cart' element={<CartPage productList={productList} cartList={cartList}/>}/>
+        <Route path='/products/:productId' element={<ProductPage productList={productList} addToCart={addToCart}/>}/>
+        <Route path='/products/create/new' element={<AddProductPage addProduct={addProduct}/>}/>
+        <Route path="/login" element={<Login />}/> 
+      </Routes>
+    </Container>
+    
+  </div>
+    </ThemeContext.Provider>
   );
 }
 

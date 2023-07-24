@@ -10,7 +10,7 @@ export default function ProductPage({ productList, addToCart }) {
    const product = productList.find(p => p.id === productId)
    
    if(!product) {
-    retutn (<h3 className="mt-4 display-4">404 Not Found</h3>)
+    return (<h3 className="mt-4 display-4">404 Not Found</h3>)
    }
 
     return (
