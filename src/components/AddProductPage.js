@@ -11,13 +11,13 @@ export default function AddProductPage({addProduct}) {
     }
 
     return (
-        <Formik initialValues={{name: '', price: 10}} onSubmit={onSubmit}>
+        <Formik initialValues={{ name: "", price: 10 }} onSubmit={onSubmit} >
             <Form className='mt-4'>
-                <label className='form-label'>Name</label>
-                <Field type="text" name="name" className="form-control"/>
-                <label className='form-label'>Price</label>
-                <Field type="number" name="price" className="form-control"/>
-                <Button variant="outline-success" className="mt-2" type="submit">Add</Button>
+            <label className='form-label'>Name</label>
+            <Field type="text" name="name" className="form-control"/>
+            <label className='form-label'>Price</label>
+            <Field type="text" name="price" className="form-control"/>
+            <Button variant="outline-success" type="submit">Add</Button>
             </Form>
         </Formik>
     )
