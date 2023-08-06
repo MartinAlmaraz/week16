@@ -1,17 +1,19 @@
-import {useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { ThemeContext } from "./ThemeContext";
-
-export default function ProductCard({ product, addToCart, showAddToCartButton}) {
-   const [theme] = useContext(ThemeContext)
+// import {useContext } from 'react';
+// import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
 
 
+
+export default function ProductCard({ product, addToCart,showAddToCartButton, removeProduct }) {
+
+   
     return (
-        <div className={"border shadow p-4 m-4 " + (theme === "dark" ? "bg-dark text-white" : "")}>
+        <div className={"border shadow p-4 m-4 "}>
             <h3>{product.name}</h3>
             <p>{product.price}</p>
-            { showAddToCartButton && <button onClick={() => addToCart(product.id)}>Add to Cart</button>}
-            <Link to={"/products/" + product.id}><button className='btn btn-primary'>Details</button></Link>
+            <Button onClick={() => removeProduct(product)}>Delete</Button>
+            { showAddToCartButton && <button onClick={() => addToCart(product)}>Add to Cart</button>}
+            
         </div>
     )
-}
+} 

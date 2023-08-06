@@ -1,11 +1,11 @@
 
 import ProductCard from './ProductCard';
 
-export default function CartPage({ cartList, productList }) {
+export default function CartPage({ cartList }) {
     return(
         <div>
            { cartList.map(cartItem => 
-            <ProductCard key={cartItem.id} showAddToCartButton={false} product={productList.find(p => p.id === cartItem.productId)} />
+            <ProductCard key={cartItem.id} showAddToCartButton={false} product={cartItem} />
         )}
         </div>
     )

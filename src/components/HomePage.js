@@ -16,6 +16,7 @@ export default function HomePage() {
                     <Nav.Link as={NavLink} to="/cart">Cart</Nav.Link>
                     <Nav.Link as={NavLink} to="/products/create/new">Products</Nav.Link>
                     <Nav.Link as={NavLink} to='/login'>Log In</Nav.Link>
+                    <Nav.Link as={NavLink} to='/contact'>Contact Us</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>

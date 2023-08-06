@@ -1,10 +1,10 @@
 import { Form, Button } from 'react-bootstrap';
-// import { useNavigate } from 'react-router-dom';
-// import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default function Login() {
   
-    // const navigate = useNavigate()
+   
 
    
     return (
@@ -21,9 +21,12 @@ export default function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type='password' placeholder='Password'/>
             </Form.Group>
+            <Link to="/">
             <Button variant="primary" type="submit">
                 Submit
             </Button>
+            </Link>
+
         </Form>
     );
 }
